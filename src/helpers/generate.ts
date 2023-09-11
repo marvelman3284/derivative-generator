@@ -16,12 +16,12 @@ function generateTerm(trig: boolean = false): string {
   let neg: boolean =  Math.random() > 0.5 ? true : false;
   let chain: number = Math.random();
 
-  term = neg == true ? coef + "*x^" + power : coef + "*x^(-" + power + ")";
+  term = neg === true ? coef + "*x^" + power : coef + "*x^(-" + power + ")";
 
-  if (chain > 0.5 && trig == true) { // chain rule
+  if (chain > 0.5 && trig === true) { // chain rule
     let outsideFunction: string = randomChoice(trigFunctions);
     term = outsideFunction.replace('x', term);
-  } else if (chain < 0.5 && trig == true) { // product rule
+  } else if (chain < 0.5 && trig === true) { // product rule
     term = term.concat(randomChoice(trigFunctions));
   } 
 
@@ -36,10 +36,10 @@ function generateF(trig: boolean = false): string {
   let operator: string = randomChoice(operators) // must choose the first operators outside the loop for the logic to wor
   
   for(let i=0; i<terms; i++) {
-    let term = trig == true ? generateTerm() : generateTerm(true);
+    let term = trig === true ? generateTerm() : generateTerm(true);
    
     // if the previously choosen operator is divison add parenthesis to the next term to reduce confusion
-    if (operator == ' / ' && i > 0) {
+    if (operator === ' / ' && i > 0) {
       term = "(" + term + ")"
     }
     
