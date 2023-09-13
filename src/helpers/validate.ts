@@ -1,6 +1,7 @@
 import { parse, derivative } from 'mathjs';
 const { symbolicEqual } = require('mathjs'); // only works if you use require, don't know why
 
+// TODO: simplify output (math.simplify)?
 function validate(question: string, answer: string): [string, boolean] {
   if (question === "") {
     question = "0";

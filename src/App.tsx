@@ -1,3 +1,7 @@
+// TODO: use mathJAX for rendering equations
+// TODO: number changer for num of terms
+// TODO: checkboxes for exp, trig, and logs
+
 import React from "react";
 import { useState } from "react";
 import "./App.css";
@@ -13,6 +17,9 @@ function App() {
   let [revealAnswer, setRevealAnswer] = useState(false);
   let [rightAnswer, setRightAnswer] = useState("");
   let [showResult, setShowResult] = useState(false);
+  let [useTrig, setUseTrig] = useState(false);
+  let [useLog, setUseLog] = useState(false);
+  let [useExp, setUseExp] = useState(false);
   let [questionDerivative, correct]: [string, boolean] = validate(
     derivative,
     answer
@@ -35,11 +42,52 @@ function App() {
     setRevealAnswer(true);
     setRightAnswer(questionDerivative);
   }
+  const handleTrig = () => {
+    setUseTrig(!useTrig);
+  }
+  
+  const handleLog = () => {
+    setUseLog(!useLog);
+  }
+  
+  const handleExp = () => {
+    setUseExp(!useExp);
+  }
 
   return (
     // TODO: need to create a checkbox for trig functions
     <div className="App">
-      <button type="button" onClick={() => setDerivative(generateF())}>
+      <input
+        type="checkbox"
+        id="trig"
+        name="trig"
+        value="Use Trig Functions?"
+        checked={useTrig}
+        onChange={handleTrig}
+        />
+        Inlcude trig functions?
+      <br/>
+      <input
+        type="checkbox"
+        id="logs"
+        name="logs"
+        value="Use Log Functions?"
+        checked={useLog}
+        onChange={handleLog}
+        />
+        Inlcude logarithmic functions (natural log as wel)?
+      <br/>
+      <input
+        type="checkbox"
+        id="exp"
+        name="exp"
+        value="Use Trig Functions?"
+        checked={useExp}
+        onChange={handleExp}
+        />
+        Inlcude exponential functions?
+      <br/>
+      <button type="button" onClick={() => setDerivative(generateF(useTrig))}>
         Generate derivative problem
       </button>
       <p>{derivative}</p>
