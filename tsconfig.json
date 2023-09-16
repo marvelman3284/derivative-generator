@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["mathjax", "node"],
     "target": "es5",
     "lib": [
       "dom",

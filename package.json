@@ -3,17 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "compilerOptions": {
-    "types": ["bun-types"],
-    "lib": ["esnext"],
+    "types": [
+      "bun-types"
+    ],
+    "lib": [
+      "esnext"
+    ],
     "module": "esnext",
     "target": "esnext",
     "moduleResolution": "bundler",
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "moduleDetection": "force",
-    "jsx": "react-jsx", 
-    "allowJs": true, 
-    "esModuleInterop": true, 
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "esModuleInterop": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
@@ -23,9 +27,10 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.48",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
+    "mathjax": "^3.2.2",
+    "mathjax-react": "^2.0.1",
     "mathjs": "^11.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -58,6 +63,8 @@
     ]
   },
   "devDependencies": {
+    "@types/mathjax": "^0.0.37",
+    "@types/node": "^20.6.1",
     "bun-types": "^1.0.1"
   }
 }

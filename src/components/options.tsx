@@ -28,10 +28,11 @@ function OptionsForm({ onSubmit }: OptionFormProps) {
     });
 
     setIsChanged(changed);
-  }, [options]);
+  }, [options, defaultOptionValues]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { name, checked } = e.target;
+    console.log(checked);
     setOptions({ ...options, [name]: checked });
   };
 

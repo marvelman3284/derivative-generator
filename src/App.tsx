@@ -8,6 +8,7 @@ import { generateF } from "./helpers/generate";
 import { validate } from "./helpers/validate";
 import { OptionValues } from "./helpers/types";
 import Footer from "./components/footer";
+import { MathComponent } from "mathjax-react";
 
 function App() {
   let [derivative, setDerivative] = useState("");
@@ -47,6 +48,7 @@ function App() {
   return (
     // TODO: need to create a checkbox for trig functions
     <div className="App">
+      
       <div className="box">
         <OptionsForm onSubmit={handleOptionsSubmit} />
       </div>
@@ -73,7 +75,7 @@ function App() {
           Generate derivative problem
         </button>
 
-        <h2>{derivative}</h2>
+        <MathComponent tex={derivative} />
 
         <form className="answer" onSubmit={submitForm}>
           <label>

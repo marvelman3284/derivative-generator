@@ -63,7 +63,7 @@ function generatePolynomial(): string {
   // use random number to decide wether to use trig functions or not and if it should be a chain rule problem
   let neg: boolean = Math.random() > 0.5 ? true : false;
 
-  term = neg === true ? coef + "x^" + power : coef + "x^(-" + power + ")";
+  term = neg === true ? coef + "x^\{" + power + "\}": coef + "x^\{-" + power + "\}";
 
   return term;
 }
