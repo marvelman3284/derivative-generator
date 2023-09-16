@@ -1,17 +1,19 @@
 // TODO: support mulitipule variables (implicit differentiation?)
+// TODO: make polynomials optional
 
 function randomChoice(arr: any[]): any {
-  // choose a random value from a given list
+  // DOC: choose a random value from a given list
   let index: number = Math.floor(Math.random() * arr.length);
   return arr[index];
 }
 
 function generateLog(): string {
+  // DOC: choose between either natural or std log, only generate the base if it's std log
   let logs: [string, string] = ["log_a(x)", "ln(x)"];
   let term: string = randomChoice(logs);
-  let base: string = Math.floor(Math.random() * 10 + 1).toString();
 
   if (term === "log_a(x)") {
+    let base: string = Math.floor(Math.random() * 10 + 1).toString();
     term = term.replace("a", base);
   }
 
@@ -19,6 +21,7 @@ function generateLog(): string {
 }
 
 function generateExp(): string {
+  // DOC: generate an exponential function, with the possibility for both the base and the power to be a variable
   let term: string = "u^x";
   let base: string | number =
     Math.random() < 0.7 ? Math.floor(Math.random() * 10 + 1).toString() : "x";
@@ -27,6 +30,7 @@ function generateExp(): string {
 }
 
 function generateTrig(): string {
+  // DOC: choose randomly between 1 of the 6 trig functions
   let trigFunctions: string[] = [
     "cos(x)",
     "sin(x)",
@@ -38,7 +42,21 @@ function generateTrig(): string {
   return randomChoice(trigFunctions);
 }
 
+function generateInverseTrig(): string {
+  // DOC: choose randomly between 1 of 6 transendental trig functions
+  let trigFunctions: string[] = [
+    "arccos(x)",
+    "arcsin(x)",
+    "arctan(x)",
+    "arcsec(x)",
+    "arccsc(x)",
+    "arccot(x)",
+  ];
+  return randomChoice(trigFunctions);
+}
+
 function generatePolynomial(): string {
+  // DOC: generate a single-term polynomial in the form a*x^(b)
   let term: string = "";
   let coef: string = (Math.floor(Math.random() * 100) + 2).toString();
   let power: string = Math.floor(Math.random() * 100).toString();
@@ -52,10 +70,12 @@ function generatePolynomial(): string {
 
 function generateTerm(
   useTrig: boolean = false,
+  useInverseTrig: boolean = false,
   useLog: boolean = false,
-  useExp: boolean = false
+  useExp: boolean = false,
+  useChain: boolean = false
 ): string {
-  // generate a mathamatical term with a coeficent, variable (x), and a power
+  // DOC: generate a single term (it might be long) based on the given parameters
   let term: string = "";
   let termList: string[] = [];
 
@@ -64,6 +84,7 @@ function generateTerm(
     return generatePolynomial();
   }
 
+  // DOC: add terms to the termList based on the parameters
   if (useTrig === true) {
     termList.push(generateTrig());
   }
@@ -76,31 +97,35 @@ function generateTerm(
     termList.push(generateExp());
   }
 
+  if (useInverseTrig === true) {
+    termList.push(generateInverseTrig());
+  }
+
+  // DOC: just for shits n gigs, have the chance of adding on a polynomial
   if (Math.random() > 0.5) {
     termList.push(generatePolynomial());
   }
 
+  // DOC: choose the first term randomly from `termList`
   let order: number = Math.floor(Math.random() * termList.length);
-  
-  // console.log(`term list: ${termList}`);
-  
   term = term.concat(termList.splice(termList.indexOf(termList[order]), 1)[0]);
-
   let len: number = termList.length;
 
   for (let i = 0; i < len; i++) {
+    // DOC: choose the next term and then decide wether it should invovle chain rule or not
     order = Math.floor(Math.random() * termList.length);
     // TODO: figure out how to implement types since logs and trig functions dont need parens
     let newTerm: string =
       "(" + termList.splice(termList.indexOf(termList[order]), 1)[0] + ")";
 
-    // console.log(`new term: ${newTerm}`);
-    // console.log(`before replace: ${term}`);
     // TODO: trig functions should be sin^u(v) instead of sin(v)^u 
-    // TODO: need to check if og term is trig function and if new term is polynomial
-    term = term.replace(/x(?!.*x)/gim, newTerm);
-
-    // console.log(`after replace: ${term}`);
+    // TODO: need to check
+    // if og term is trig function and if new term is polynomial
+    if (Math.random() > 0.5 && useChain === true) {
+      term = term.replace(/x(?!.*x)/gim, newTerm);
+    } else {
+      term = term.concat(newTerm);
+    }
   }
 
   return term;
@@ -108,27 +133,29 @@ function generateTerm(
 
 function generateF(
   trig: boolean = false,
+  invTrig: boolean = false,
   log: boolean = false,
   exp: boolean = false,
-  numOfTerms: number
+  chain: boolean = false,
+  numOfTerms: number = 1
 ): string {
-  // create a polynomial
-  // let terms: number = Math.floor(Math.random() * 5 + 1);
+  // DOC: generate a function composed of multiple terms with operators seperating them
   let terms: number = numOfTerms;
   let operators: string[] = [" + ", " - ", " / ", " * "];
   let div: boolean = false;
   let f: string = "";
 
   for (let i = 0; i < terms; i++) {
-    let operator = randomChoice(operators); // choose a new operator
-    let term = generateTerm(trig, log, exp);
+    let operator = randomChoice(operators); // DOC: choose a new operator
+    let term = generateTerm(trig, invTrig, log, exp, chain);
 
-    if (i == 0) {
-      // make sure not to have a hanging operator
+    if (i === 0) {
+      // DOC: operators are concatenated before the term, so the first term does not get an operator
       f = f.concat(term);
     } else {
       f = f.concat(operator);
 
+      // DOC: logic to add parens around terms if the last operator was division in order to increase readability
       if (div === true) {
         f = f.concat(")");
         div = false;
@@ -144,7 +171,5 @@ function generateF(
   }
   return f;
 }
-
-console.log(generateF(true, true, true));
 
 export { generateF };
