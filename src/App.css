@@ -34,8 +34,8 @@
   /* margin-top: 10px; */
   margin: 10px;
   position: absolute;
-  top: 0;
-  right: 0;
+  bottom: 44px;
+  left: 10px;
 }
 
 /* CSS for small screens (e.g., mobile) */

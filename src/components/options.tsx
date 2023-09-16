@@ -68,7 +68,7 @@ function OptionsForm({ onSubmit }: OptionFormProps) {
         <label>
           <input
             type="checkbox"
-            name="useLogs"
+            name="useLog"
             checked={options.useLog}
             onChange={handleChange}
           />

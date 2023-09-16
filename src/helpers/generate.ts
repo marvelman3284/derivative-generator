@@ -22,7 +22,7 @@ function generateLog(): string {
 
 function generateExp(): string {
   // DOC: generate an exponential function, with the possibility for both the base and the power to be a variable
-  let term: string = "u^x";
+  let term: string = "u^{(x)}";
   let base: string | number =
     Math.random() < 0.7 ? Math.floor(Math.random() * 10 + 1).toString() : "x";
 

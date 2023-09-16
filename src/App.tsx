@@ -8,8 +8,8 @@ import { generateF } from "./helpers/generate";
 import { validate } from "./helpers/validate";
 import { OptionValues } from "./helpers/types";
 import Footer from "./components/footer";
-// import 'katex/dist/katex.min.css';
-// import { BlockMath } from 'react-katex';
+import 'katex/dist/katex.min.css';
+import { BlockMath } from 'react-katex';
 
 
 function App() {
@@ -76,8 +76,9 @@ function App() {
           Generate derivative problem
         </button>
 
-        { /*<BlockMath math={derivative} />*/}
-        <h2>{derivative}</h2>
+        <h3>
+        <BlockMath math={derivative} />
+        </h3>
 
 
         <form className="answer" onSubmit={submitForm}>
