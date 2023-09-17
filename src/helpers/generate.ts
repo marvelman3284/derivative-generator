@@ -147,7 +147,7 @@ function generateF(
   let operator: string = "";
   let useDiv: boolean = false;
   let skip: boolean = false;
-  let f: string = "";
+  let f: string = "d/dx[";
 
   if (quotient === true) {
     operators.push(" / ");
@@ -160,12 +160,28 @@ function generateF(
   for (let i = 0; i < terms; i++) {
     operator = randomChoice(operators); // DOC: choose a new operator
     let term = generateTerm(trig, invTrig, log, exp, chain);
-
-    if (i !== 0) {
-      f = f.concat(operator)
+    let termTex: string = "";
+  
+    if (skip === true) {
+      skip = false;
+      continue;
     }
-    f = f.concat(term);
+
+    if (operator === " / ") {
+      console.log("div");
+      termTex = "\\dfrac{" + term + "}";
+      let nextTerm: string = generateTerm(trig, invTrig, log, exp, chain);
+      termTex = "(" + termTex + "{" + nextTerm + "})";
+      f = f.concat(termTex);
+      skip = true;
+    } else {
+      if (i !== 0) {
+        f = f.concat(operator)
+      }
+      f = f.concat(term);
+    }
   }
+  f = f.concat("]=?")
   return f;
 }
 
