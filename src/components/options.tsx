@@ -10,6 +10,8 @@ function OptionsForm({ onSubmit }: OptionFormProps) {
     useExp: false,
     useLog: false,
     useChain: false,
+    useProduct: false,
+    useQuotient: false,
     numTerms: 1,
   };
 
@@ -109,6 +111,30 @@ function OptionsForm({ onSubmit }: OptionFormProps) {
             onChange={handleChange}
           />
           Include chain rule problems?
+        </label>
+
+        <br />
+
+        <label>
+          <input
+            type="checkbox"
+            name="useQuotient"
+            checked={options.useQuotient}
+            onChange={handleChange}
+          />
+          Include quotient rule problems?
+        </label>
+
+        <br />
+
+        <label>
+          <input
+            type="checkbox"
+            name="useProduct"
+            checked={options.useProduct}
+            onChange={handleChange}
+          />
+          Include product rule problems?
         </label>
 
         <br />

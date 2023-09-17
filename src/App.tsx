@@ -1,4 +1,5 @@
 // TODO: use mathJAX for rendering equations
+// TODO: speedrun mode?
 
 import React from "react";
 import "./App.css";
@@ -68,6 +69,8 @@ function App() {
                 optionsData?.useLog,
                 optionsData?.useExp,
                 optionsData?.useChain,
+                optionsData?.useQuotient,
+                optionsData?.useProduct,
                 optionsData?.numTerms
               )
             )

@@ -5,6 +5,8 @@ export interface OptionValues {
   useExp: boolean,
   useLog: boolean,
   useChain: boolean,
+  useQuotient: boolean,
+  useProduct: boolean,
   numTerms: number 
 }
 

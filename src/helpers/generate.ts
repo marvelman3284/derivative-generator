@@ -63,7 +63,8 @@ function generatePolynomial(): string {
   // use random number to decide wether to use trig functions or not and if it should be a chain rule problem
   let neg: boolean = Math.random() > 0.5 ? true : false;
 
-  term = neg === true ? coef + "x^{" + power + "}" : coef + "x^{(-" + power + ")}";
+  term =
+    neg === true ? coef + "x^{" + power + "}" : coef + "x^{(-" + power + ")}";
 
   return term;
 }
@@ -79,7 +80,6 @@ function generateTerm(
   let term: string = "";
   let termList: string[] = [];
 
-  
   if (useTrig === false && useLog === false && useExp === false) {
     return generatePolynomial();
   }
@@ -118,7 +118,7 @@ function generateTerm(
     let newTerm: string =
       "(" + termList.splice(termList.indexOf(termList[order]), 1)[0] + ")";
 
-    // TODO: trig functions should be sin^u(v) instead of sin(v)^u 
+    // TODO: trig functions should be sin^u(v) instead of sin(v)^u
     // TODO: need to check
     // if og term is trig function and if new term is polynomial
     if (Math.random() > 0.5 && useChain === true) {
@@ -137,37 +137,34 @@ function generateF(
   log: boolean = false,
   exp: boolean = false,
   chain: boolean = false,
+  quotient: boolean = false,
+  product: boolean = false,
   numOfTerms: number = 1
 ): string {
   // DOC: generate a function composed of multiple terms with operators seperating them
   let terms: number = numOfTerms;
-  let operators: string[] = [" + ", " - ", " / ", " * "];
-  let div: boolean = false;
+  let operators: string[] = [" + ", " - "];
+  let operator: string = "";
+  let useDiv: boolean = false;
+  let skip: boolean = false;
   let f: string = "";
 
+  if (quotient === true) {
+    operators.push(" / ");
+  }
+
+  if (product === true) {
+    operators.push(" * ");
+  }
+
   for (let i = 0; i < terms; i++) {
-    let operator = randomChoice(operators); // DOC: choose a new operator
+    operator = randomChoice(operators); // DOC: choose a new operator
     let term = generateTerm(trig, invTrig, log, exp, chain);
 
-    if (i === 0) {
-      // DOC: operators are concatenated before the term, so the first term does not get an operator
-      f = f.concat(term);
-    } else {
-      f = f.concat(operator);
-
-      // DOC: logic to add parens around terms if the last operator was division in order to increase readability
-      if (div === true) {
-        f = f.concat(")");
-        div = false;
-      }
-
-      if (operator === " / ") {
-        f = f.concat("(");
-        div = true;
-      }
-
-      f = f.concat(term);
+    if (i !== 0) {
+      f = f.concat(operator)
     }
+    f = f.concat(term);
   }
   return f;
 }
