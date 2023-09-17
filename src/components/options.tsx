@@ -26,7 +26,7 @@ function OptionsForm({ onSubmit }: OptionFormProps) {
   useEffect(() => {
     const changed = Object.keys(options).some((key) => {
       return (
-        // eslint-ignore-next-line
+        // eslint-disable-next-line
         options[key as keyof OptionValues] !=
         defaultOptionValues[key as keyof OptionValues]
       );
