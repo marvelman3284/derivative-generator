@@ -1,30 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { OptionFormProps, OptionValues } from "../helpers/types";
 import "../App.css";
 
 function OptionsForm({ onSubmit }: OptionFormProps) {
   // DOC: default option values used for comparisions
-  const defaultOptionValues: OptionValues = {
-    useTrig: false,
-    useInvTrig: false,
-    useExp: false,
-    useLog: false,
-    useChain: false,
-    useProduct: false,
-    useQuotient: false,
-    numTerms: 1,
-  };
+  const defaultOptionValues: OptionValues = useMemo(
+    () => ({
+      useTrig: false,
+      useInvTrig: false,
+      useExp: false,
+      useLog: false,
+      useChain: false,
+      useProduct: false,
+      useQuotient: false,
+      numTerms: 1,
+    }),
+    []
+  );
 
   const [isChanged, setIsChanged] = useState<boolean>(false);
 
-  const [options, setOptions] =
-    useState<OptionValues>(defaultOptionValues);
+  const [options, setOptions] = useState<OptionValues>(defaultOptionValues);
 
   // DOC: check if the form (state) has changed and update `isChanged` accordingly
   useEffect(() => {
     const changed = Object.keys(options).some((key) => {
       return (
-        // eslint-disable-next-line
+        // eslint-ignore-next-line
         options[key as keyof OptionValues] !=
         defaultOptionValues[key as keyof OptionValues]
       );
