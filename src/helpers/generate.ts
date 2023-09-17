@@ -162,7 +162,7 @@ function generateF(
     operator = randomChoice(operators); // DOC: choose a new operator
     let term = generateTerm(trig, invTrig, log, exp, chain);
     let termTex: string = "";
-  
+
     if (skip === true) {
       skip = false;
       continue;
@@ -173,7 +173,7 @@ function generateF(
       let nextTerm: string = generateTerm(trig, invTrig, log, exp, chain);
       termTex = "(" + termTex + "{" + nextTerm + "})";
       texF = texF.concat(termTex);
-      f = f.concat(term, " / ", nextTerm)
+      f = f.concat(term, " / ", nextTerm);
       skip = true;
     } else {
       if (i !== 0) {
@@ -185,11 +185,10 @@ function generateF(
     }
   }
 
-  
   f = f.replace(/{/g, "");
   f = f.replace(/}/g, "");
   console.log(f, texF);
-  texF = texF.concat("]=?")
+  texF = texF.concat("]=?");
   return [texF, f];
 }
 
