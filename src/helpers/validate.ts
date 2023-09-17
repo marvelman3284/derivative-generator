@@ -2,6 +2,7 @@ import { parse, derivative } from 'mathjs';
 const { symbolicEqual } = require('mathjs'); // HACK: only works if you use require, don't know why
 
 // TODO: simplify output (math.simplify)?
+// TODO: render output in katex
 function validate(question: string, answer: string): [string, boolean] {
   // DOC: check the user inputted derivative aginst the computer generated one
 

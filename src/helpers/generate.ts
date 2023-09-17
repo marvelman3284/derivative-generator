@@ -140,13 +140,15 @@ function generateF(
   quotient: boolean = false,
   product: boolean = false,
   numOfTerms: number = 1
-): string {
+): [string, string] {
   // DOC: generate a function composed of multiple terms with operators seperating them
   let terms: number = numOfTerms;
   let operators: string[] = [" + ", " - "];
   let operator: string = "";
   let skip: boolean = false;
-  let f: string = "d/dx[";
+  let texF: string = "d/dx[";
+  let f: string = "";
+  let div: boolean = false;
 
   if (quotient === true) {
     operators.push(" / ");
@@ -167,21 +169,28 @@ function generateF(
     }
 
     if (operator === " / ") {
-      console.log("div");
       termTex = "\\dfrac{" + term + "}";
       let nextTerm: string = generateTerm(trig, invTrig, log, exp, chain);
       termTex = "(" + termTex + "{" + nextTerm + "})";
-      f = f.concat(termTex);
+      texF = texF.concat(termTex);
+      f = f.concat(term, " / ", nextTerm)
       skip = true;
     } else {
       if (i !== 0) {
-        f = f.concat(operator)
+        texF = texF.concat(operator);
+        f = f.concat(operator);
       }
+      texF = texF.concat(term);
       f = f.concat(term);
     }
   }
-  f = f.concat("]=?")
-  return f;
+
+  
+  f = f.replace(/{/g, "");
+  f = f.replace(/}/g, "");
+  console.log(f, texF);
+  texF = texF.concat("]=?")
+  return [texF, f];
 }
 
 export { generateF };

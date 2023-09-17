@@ -9,19 +9,18 @@ import { generateF } from "./helpers/generate";
 import { validate } from "./helpers/validate";
 import { OptionValues } from "./helpers/types";
 import Footer from "./components/footer";
-import 'katex/dist/katex.min.css';
-import { BlockMath } from 'react-katex';
-
+import "katex/dist/katex.min.css";
+import { BlockMath } from "react-katex";
 
 function App() {
-  let [derivative, setDerivative] = useState("");
+  let [derivative, setDerivative] = useState(["", ""]);
   let [answer, setAnswer] = useState("");
   let [reveal, setReveal] = useState(false); // DOC: this is to reveal the `reveal correct answer` button
   let [revealAnswer, setRevealAnswer] = useState(false); // DOC: and this is to reveal the actual correct answer in text
   let [rightAnswer, setRightAnswer] = useState(""); // DOC: these next three are kinda redundent but im too stupid to fix it
   let [showResult, setShowResult] = useState(false);
   let [questionDerivative, correct]: [string, boolean] = validate(
-    derivative,
+    derivative[1],
     answer
   );
 
@@ -54,7 +53,7 @@ function App() {
       <div className="box">
         <OptionsForm onSubmit={handleOptionsSubmit} />
       </div>
-      
+
       <br />
 
       <div className="problem">
@@ -80,9 +79,8 @@ function App() {
         </button>
 
         <h3>
-        <BlockMath math={derivative} />
+          <BlockMath math={derivative[0]} />
         </h3>
-
 
         <form className="answer" onSubmit={submitForm}>
           <label>
@@ -113,7 +111,8 @@ function App() {
                 <h2>Correct Answer (simplified): {rightAnswer}</h2>
                 <h3>
                   <a
-                    href={`https://derivative-calculator.net/#expr=${derivative}&diffvar=x&showsteps=1`}
+                    href={`https://derivative-calculator.net/#expr=${derivative[1]}&diffvar=x&showsteps=1`}
+                    target="_blank"
                   >
                     how?
                   </a>
