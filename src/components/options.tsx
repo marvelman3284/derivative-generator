@@ -24,13 +24,14 @@ function OptionsForm({ onSubmit }: OptionFormProps) {
   useEffect(() => {
     const changed = Object.keys(options).some((key) => {
       return (
+        // eslint-disable-next-line
         options[key as keyof OptionValues] !=
         defaultOptionValues[key as keyof OptionValues]
       );
     });
 
     setIsChanged(changed);
-  }, [options]);
+  }, [options, defaultOptionValues]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { name, checked } = e.target;

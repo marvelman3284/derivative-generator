@@ -145,7 +145,6 @@ function generateF(
   let terms: number = numOfTerms;
   let operators: string[] = [" + ", " - "];
   let operator: string = "";
-  let useDiv: boolean = false;
   let skip: boolean = false;
   let f: string = "d/dx[";
 
