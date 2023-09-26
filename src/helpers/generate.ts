@@ -1,5 +1,6 @@
 // TODO: support mulitipule variables (implicit differentiation?)
 // TODO: make polynomials optional
+// TODO: fix inverse trig
 
 function randomChoice(arr: any[]): any {
   // DOC: choose a random value from a given list

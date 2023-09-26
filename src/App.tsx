@@ -1,4 +1,3 @@
-// TODO: use mathJAX for rendering equations
 // TODO: speedrun mode?
 
 import React from "react";
