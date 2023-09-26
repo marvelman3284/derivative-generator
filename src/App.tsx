@@ -113,6 +113,7 @@ function App() {
                   <a
                     href={`https://derivative-calculator.net/#expr=${derivative[1]}&diffvar=x&showsteps=1`}
                     target="_blank"
+                    rel="noreferrer"
                   >
                     how?
                   </a>

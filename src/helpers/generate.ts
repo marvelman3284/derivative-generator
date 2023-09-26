@@ -149,7 +149,6 @@ function generateF(
   let skip: boolean = false;
   let texF: string = "d/dx[";
   let f: string = "";
-  let div: boolean = false;
 
   if (quotient === true) {
     operators.push(" / ");
