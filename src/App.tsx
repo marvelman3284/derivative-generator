@@ -105,9 +105,10 @@ function App() {
           <br />
           {
             // eslint-disable-next-line
+            // TODO: needs to be rendered as latex
             revealAnswer && (
               <>
-                <h2>Correct Answer (simplified): {rightAnswer}</h2>
+                <h2>Correct Answer (simplified): {rightAnswer}</h2> 
                 <h3>
                   <a
                     href={`https://derivative-calculator.net/#expr=${derivative[1]}&diffvar=x&showsteps=1`}
