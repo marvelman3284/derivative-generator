@@ -63,6 +63,7 @@ function App() {
 
   const handleReveal = () => {
     setRevealAnswer(true);
+    questionDerivative = questionDerivative.replace(/( \d+)/g, "{$1}");
     setRightAnswer(questionDerivative);
   };
 
@@ -111,16 +112,16 @@ function App() {
             // TODO: needs to be rendered as latex
             revealAnswer && (
               <>
-                <h2>Correct Answer (simplified): <BlockMath math={rightAnswer}/></h2>
-                {console.log(rightAnswer, derivative)}
-                {console.log(questionDerivative)}
+                <h2>
+                  Correct Answer (simplified): <BlockMath math={rightAnswer} />
+                </h2>
                 <h3>
                   <a
                     href={`https://derivative-calculator.net/#expr=${derivative[1]}&diffvar=x&showsteps=1`}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    how?
+                    Click here to see why.
                   </a>
                 </h3>
               </>

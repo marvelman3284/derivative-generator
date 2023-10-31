@@ -22,6 +22,7 @@ function validate(question: string, answer: string): [string, boolean] {
       parse(question),
       "x"
     ).toString();
+
     let equality: boolean = symbolicEqual(answerDerivative, questionDerivative);
 
     return [questionDerivative, equality];
