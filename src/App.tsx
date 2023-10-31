@@ -1,4 +1,6 @@
 // TODO: speedrun mode?
+// TODO: when a new question is generate the page should be reset
+// TODO: FAQ page - explain how everything works?
 
 import React from "react";
 import "./App.css";
@@ -41,6 +43,24 @@ function App() {
     setShowResult(true);
   };
 
+  const clickProblem = () => {
+    setDerivative(
+      generateF(
+        optionsData?.useTrig,
+        optionsData?.useInvTrig,
+        optionsData?.useLog,
+        optionsData?.useExp,
+        optionsData?.useChain,
+        optionsData?.useQuotient,
+        optionsData?.useProduct,
+        optionsData?.numTerms
+      )
+    );
+    setReveal(false);
+    setRevealAnswer(false);
+    setShowResult(false);
+  };
+
   const handleReveal = () => {
     setRevealAnswer(true);
     setRightAnswer(questionDerivative);
@@ -56,24 +76,7 @@ function App() {
       <br />
 
       <div className="problem">
-        <button
-          type="button"
-          className="generate"
-          onClick={() =>
-            setDerivative(
-              generateF(
-                optionsData?.useTrig,
-                optionsData?.useInvTrig,
-                optionsData?.useLog,
-                optionsData?.useExp,
-                optionsData?.useChain,
-                optionsData?.useQuotient,
-                optionsData?.useProduct,
-                optionsData?.numTerms
-              )
-            )
-          }
-        >
+        <button type="button" className="generate" onClick={clickProblem}>
           Generate derivative problem
         </button>
 
@@ -108,7 +111,9 @@ function App() {
             // TODO: needs to be rendered as latex
             revealAnswer && (
               <>
-                <h2>Correct Answer (simplified): {rightAnswer}</h2> 
+                <h2>Correct Answer (simplified): <BlockMath math={rightAnswer}/></h2>
+                {console.log(rightAnswer, derivative)}
+                {console.log(questionDerivative)}
                 <h3>
                   <a
                     href={`https://derivative-calculator.net/#expr=${derivative[1]}&diffvar=x&showsteps=1`}

@@ -26,6 +26,7 @@ function validate(question: string, answer: string): [string, boolean] {
 
     return [questionDerivative, equality];
   } catch (error) {
+    console.log(error);
     return ["", false];
   }
 }

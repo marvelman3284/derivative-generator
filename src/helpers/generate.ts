@@ -10,6 +10,7 @@ function randomChoice(arr: any[]): any {
 
 function generateLog(): string {
   // DOC: choose between either natural or std log, only generate the base if it's std log
+  // TODO: fix logs need to be in format log(var, base) to be derived
   let logs: [string, string] = ["log_a(x)", "ln(x)"];
   let term: string = randomChoice(logs);
 
@@ -81,8 +82,11 @@ function generateTerm(
   let term: string = "";
   let termList: string[] = [];
 
-  if (useTrig === false && useLog === false && useExp === false) {
-    return generatePolynomial();
+  if (useTrig === false && useLog === false && useExp === false && useInverseTrig === false) {
+    termList.push(generatePolynomial());
+    if (useChain === true) {
+      termList.push(generatePolynomial());
+    }
   }
 
   // DOC: add terms to the termList based on the parameters
@@ -100,13 +104,14 @@ function generateTerm(
 
   if (useInverseTrig === true) {
     termList.push(generateInverseTrig());
+    console.log(termList);
   }
 
   // DOC: just for shits n gigs, have the chance of adding on a polynomial
-  if (Math.random() > 0.5) {
+  if (Math.random() > 0.7) {
     termList.push(generatePolynomial());
   }
-
+  
   // DOC: choose the first term randomly from `termList`
   let order: number = Math.floor(Math.random() * termList.length);
   term = term.concat(termList.splice(termList.indexOf(termList[order]), 1)[0]);
@@ -119,10 +124,10 @@ function generateTerm(
     let newTerm: string =
       "(" + termList.splice(termList.indexOf(termList[order]), 1)[0] + ")";
 
-    // TODO: trig functions should be sin^u(v) instead of sin(v)^u
+    // TODO: trig functions should be sin^u(v) instead of (sin(v))^u
     // TODO: need to check
     // if og term is trig function and if new term is polynomial
-    if (Math.random() > 0.5 && useChain === true) {
+    if (Math.random() > 0.3 && useChain === true) {
       term = term.replace(/x(?!.*x)/gim, newTerm);
     } else {
       term = term.concat(newTerm);
