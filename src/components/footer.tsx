@@ -11,6 +11,7 @@ function Footer() {
         <a href="https://github.com/marvelman3284/derivative-generator">
           Find the source code here
         </a>
+        and an explination of how this works <a href="/faq"> here </a>
       </div>
     </footer>
   );

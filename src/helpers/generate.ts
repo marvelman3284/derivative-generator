@@ -152,11 +152,10 @@ function generateF(
   numOfTerms: number = 1
 ): [string, string] {
   // DOC: generate a function composed of multiple terms with operators seperating them
-  let terms: number = numOfTerms;
   let operators: string[] = [" + ", " - "];
   let operator: string = "";
   let skip: boolean = false;
-  let texF: string = "d/dx[";
+  let texF: string = "\\frac{d}{dx}[";
   let f: string = "";
 
   if (quotient === true) {
@@ -167,7 +166,7 @@ function generateF(
     operators.push(" * ");
   }
 
-  for (let i = 0; i < terms; i++) {
+  for (let i = 0; i < numOfTerms; i++) {
     operator = randomChoice(operators); // DOC: choose a new operator
     let term = generateTerm(trig, invTrig, log, exp, chain);
     let termTex: string = "";
